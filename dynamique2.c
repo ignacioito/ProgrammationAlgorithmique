@@ -115,9 +115,20 @@ int main()
     int* tabPile = fabriquerTableauPile();
     int* tabTas = fabriquerTableauTas();
 
+    int a[30];
+    for (int i = 0; i < 30; ++i)
+    {
+        printf("%d", a[i]);
+    }
 
-    int* tabPile = (int *)malloc(TAILLE * sizeof(int));
+    printf("\n");
 
+    int* b = (int*)malloc(45 * sizeof(int));
+    for (int i = 0; i < 45; ++i)
+    {
+        printf("%d", b[i]);
+    }
+    printf("\n");
 
     printf("*************** Impression du tableaux 1 ***************\n");
     imprimerTableau(tabPile);
