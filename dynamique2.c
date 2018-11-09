@@ -128,7 +128,7 @@ int main()
     {
         printf("%d", b[i]);
     }
-    printf("\n");
+    printf("n\n");
 
     printf("*************** Impression du tableaux 1 ***************\n");
     imprimerTableau(tabPile);
