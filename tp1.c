@@ -1,23 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
+
 #define MIN 1
 #define MAX 6
-#include <math.h>
+#define CICLO 200
+#define CHANCE 3
+
 
 typedef struct Client Client;
   struct Client{
 
-  	int instant;
-  	int nbArticle;
-  	Client* suivant;
+    int instant;
+    int nbArticle;
+    Client* suivant;
 
    };
 
  typedef struct Queue Queue;
   struct Queue{
 
-  	Client* premiere;
+    Client* premiere;
 
    };
 
@@ -30,29 +34,32 @@ void imprimerQueue(Queue queue);
 
 
    void nouveauClient (){
-		
-		Queue queue;
-		queue.premiere = NULL;
+    
+    Queue queue;
+    queue.premiere = NULL;
 
-  	for (int i = 0; i < 200; ++i)
-  	{
-  		int n = rand() % MAX + MIN;
-     	
-     	if (n == 3)
-     	{
-     		Client* nouveauClient = (Client*)malloc(sizeof(Client));
- //cree client 
-			nouveauClient->suivant = NULL;
-     		nouveauClient->instant = i;
-     		nouveauClient->nbArticle = randExpo (0.1);
-     		offrirClient (&queue, nouveauClient);
-     	}
+    for (int i = 0; i < CICLO; ++i)
+    {
+      int n = rand() % MAX + MIN;
+      
+      if (n == CHANCE)
+      {
+        Client* nouveauClient = (Client*)malloc(sizeof(Client)); //cree client
 
-     	/*if(queue->premiere->nbArticle == 0)
-     	{
-     		free (*premiere);
-     	}*/
-     	imprimerQueue(queue);
+      nouveauClient->suivant = NULL;
+        nouveauClient->instant = i;
+        nouveauClient->nbArticle = randExpo (0.1);
+        offrirClient (&queue, nouveauClient);
+      }
+
+
+
+      if(nouveauClient->nbArticle == 0)
+      {
+        free (nouveauClient);
+      }
+
+      imprimerQueue(queue);
      }
 
      
@@ -60,12 +67,14 @@ void imprimerQueue(Queue queue);
 
 //--------------------------------------------------------------------------
 
-	double randExpo(double lambda)
-	{
-  		double u = rand() / (RAND_MAX + 1.0);
-  		return -log(1 - u) / lambda;
-	}
+  double randExpo(double lambda)
+  {
+      double u = rand() / (RAND_MAX + 1.0);
+      return -log(1 - u) / lambda;
+  }
 
+//--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
 
@@ -73,25 +82,27 @@ void imprimerQueue(Queue queue);
   void offrirClient(Queue* queue, Client* client)
  {
 
-  	if (queue->premiere == NULL)
-  		{
-  		queue->premiere = client;
-  		}
-  		
-  	else 
+    if (queue->premiere == NULL)
+      {
+      queue->premiere = client; // se o primeiro da fila tiver NULL tem espaço para coloca-lo ali na filha
+      }
+      
+    else 
 
-  	{
-  		Client* temporaire = queue->premiere;
-  			
-  		while (temporaire->suivant != NULL)
-		{
-  			temporaire = temporaire->suivant;
-  		}
-  			temporaire->suivant = client;
-  	}
+    {
+      Client* temporaire = queue->premiere; // 
+        
+      while (temporaire->suivant != NULL)
+    {
+        temporaire = temporaire->suivant;
+      }
+        temporaire->suivant = client;
+    }
  
   
 }
+// essa funçao observa s fila, se o primeiuro é nulo significa que nao tem ninguem na fila e ele recebe cliente
+// o cliente aponta para o proximo. enquanto o  
 
 // Ici nous avons couru un pour pour pour la première fois remplir le tableau contenant
 // les valeurs des données du premier coup.
@@ -114,20 +125,22 @@ void imprimerQueue(Queue queue);
   
 
   void imprimerQueue(Queue queue)
- 	{
- 			Client* temporaire = queue.premiere;
-  			while (temporaire->suivant != NULL)
-			{
-  				temporaire = temporaire->suivant;
-  				printf("valor %d", temporaire->nbArticle);
-  				printf("\n");
-  			}
-  				
-  					
- 	}
+  {
+      Client* temporaire = queue.premiere;
+        while (temporaire != NULL)
+      {
+          printf("valor %d", temporaire->nbArticle);
+          temporaire = temporaire->suivant;
+          
+          //
+          printf("\n");
+        }
+          
+            
+  }
 
   int main ()
   {
-  	nouveauClient();
-  	
+    nouveauClient();
+    
   }
