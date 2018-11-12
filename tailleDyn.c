@@ -2,6 +2,7 @@
 #include<stdlib.h>
 
 #define BUFF 3
+#
 
 typedef struct TabDyn TabDyn;
 struct TabDyn{
