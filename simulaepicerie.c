@@ -9,7 +9,7 @@ struct Client
 	int nbArticles;
 	int arrivee;
 };
-
+ 
 
 Client* creerClientDyn(int instant, int nbArticles)
 {
