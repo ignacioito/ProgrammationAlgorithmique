@@ -54,7 +54,7 @@ void imprimerQueue(Queue queue);
 
 
 
-     	if(nouveauClient == 0)
+     	if(*nouveauClient == 0)
      	{
      		free (*nouveauClient);
      	}
@@ -110,17 +110,44 @@ void imprimerQueue(Queue queue);
 
   // Retourne le premier client dans la queue.
   // Si la queue est vide, NULL est retourne.
-  Client* coupDOeilTete(Queue queue);
+  Client* coupDOeilTete(Queue queue){
 
+    if(queue.premiere != NULL){
+      queue->premiere;
+    }else{
+      return NULL;
+    }
+    
+  }
 
   // Retire et retourne le premier client dans la queue.
   // Si la queue est vide, NULL est retourne.
   Client* obtenirTete(Queue* queue);
 
+  clientAux;
+
+  clientAux = queue->premiere;
+
+  queue->premiere = clientAux->suivant;
+
+  free(clientAux);
+
+  return queue->premiere;
+
+  
 
   // Retourne le nombre de clients dans la queue.
-  int longueurQueue(Queue queue);
-
+  int longueurQueue(Queue queue)
+  {
+  int c;
+  Client* clientAux;
+  clientAux = queue.premiere;
+  while(clientAux->premiere != NULL){
+    clientAux = clientAux->premiere;
+    c = c + 1;
+  }
+  return c;
+}
   // Imprime chaque client de la queue.
   
 
@@ -129,11 +156,10 @@ void imprimerQueue(Queue queue);
  			Client* temporaire = queue.premiere;
   			while (temporaire != NULL)
 			{
-  				printf("valor %d", temporaire->nbArticle);
+  				printf("valeur %d", temporaire->nbArticle);
   				temporaire = temporaire->suivant;
   				
   				//
-  				printf("\n");
   			}
   				
   					
@@ -141,6 +167,7 @@ void imprimerQueue(Queue queue);
 
   int main ()
   {
+  
   	nouveauClient();
   	
   }

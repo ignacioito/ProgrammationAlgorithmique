@@ -41,18 +41,23 @@ int fonctionMystere(long n){
 
 int palyndrome(char* c, int longueur)
 {
-    for (int i = 0; i < longueur; ++i)
-    {
-    	if (c[i] == c[longueur - 1]){
-
-    	}
-    	else
+	if ((longueur == 0) || (longueur == 1))
+	{
+		printf("C'est un palyndrome");
+		printf("\n");
+	}
+		if ((*c == c[longueur - 1]) && palyndrome(c + 1, longueur - 2))
+		{
+			printf("C'est un palyndrome");
+		    	printf("\n");
+		}
     }
+
     
    
     //if (c[0] == c[longueur - 1]) return 1;
     //else return 0;
-}
+
 
 // ****************************************************************************
 // void syracuse(long n)
