@@ -12,26 +12,16 @@
 typedef struct Client Client;
   struct Client{
 
-<<<<<<< HEAD
   	int instant;
   	int nbArticle;
   	Client* suivant;
-=======
-    int instant;
-    int nbArticle;
-    Client* suivant;
->>>>>>> 8870430a2c3eac328190b64d9d82f01985d6f081
 
    };
 
  typedef struct Queue Queue;
   struct Queue{
 
-<<<<<<< HEAD
   	Client* premiere;
-=======
-    Client* premiere;
->>>>>>> 8870430a2c3eac328190b64d9d82f01985d6f081
 
    };
 
@@ -44,7 +34,6 @@ void imprimerQueue(Queue queue);
 
 
    void nouveauClient (){
-<<<<<<< HEAD
 		
 		Queue queue;
 		queue.premiere = NULL;
@@ -65,40 +54,12 @@ void imprimerQueue(Queue queue);
 
 
 
-     	if(nouveauClient->nbArticle == 0)
+     	if(*nouveauClient == 0)
      	{
      		free (*nouveauClient);
      	}
 
      	imprimerQueue(queue);
-=======
-    
-    Queue queue;
-    queue.premiere = NULL;
-
-    for (int i = 0; i < CICLO; ++i)
-    {
-      int n = rand() % MAX + MIN;
-      
-      if (n == CHANCE)
-      {
-        Client* nouveauClient = (Client*)malloc(sizeof(Client)); //cree client
-
-      nouveauClient->suivant = NULL;
-        nouveauClient->instant = i;
-        nouveauClient->nbArticle = randExpo (0.1);
-        offrirClient (&queue, nouveauClient);
-      }
-
-
-
-      if(nouveauClient->nbArticle == 0)
-      {
-        free (nouveauClient);
-      }
-
-      imprimerQueue(queue);
->>>>>>> 8870430a2c3eac328190b64d9d82f01985d6f081
      }
 
      
@@ -106,19 +67,11 @@ void imprimerQueue(Queue queue);
 
 //--------------------------------------------------------------------------
 
-<<<<<<< HEAD
 	double randExpo(double lambda)
 	{
   		double u = rand() / (RAND_MAX + 1.0);
   		return -log(1 - u) / lambda;
 	}
-=======
-  double randExpo(double lambda)
-  {
-      double u = rand() / (RAND_MAX + 1.0);
-      return -log(1 - u) / lambda;
-  }
->>>>>>> 8870430a2c3eac328190b64d9d82f01985d6f081
 
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
@@ -129,7 +82,6 @@ void imprimerQueue(Queue queue);
   void offrirClient(Queue* queue, Client* client)
  {
 
-<<<<<<< HEAD
   	if (queue->premiere == NULL)
   		{
   		queue->premiere = client; // se o primeiro da fila tiver NULL tem espaço para coloca-lo ali na filha
@@ -146,24 +98,6 @@ void imprimerQueue(Queue queue);
   		}
   			temporaire->suivant = client;
   	}
-=======
-    if (queue->premiere == NULL)
-      {
-      queue->premiere = client; // se o primeiro da fila tiver NULL tem espaço para coloca-lo ali na filha
-      }
-      
-    else 
-
-    {
-      Client* temporaire = queue->premiere; // 
-        
-      while (temporaire->suivant != NULL)
-    {
-        temporaire = temporaire->suivant;
-      }
-        temporaire->suivant = client;
-    }
->>>>>>> 8870430a2c3eac328190b64d9d82f01985d6f081
  
   
 }
@@ -176,31 +110,56 @@ void imprimerQueue(Queue queue);
 
   // Retourne le premier client dans la queue.
   // Si la queue est vide, NULL est retourne.
-  Client* coupDOeilTete(Queue queue);
+  Client* coupDOeilTete(Queue queue){
 
+    if(queue.premiere != NULL){
+      queue->premiere;
+    }else{
+      return NULL;
+    }
+    
+  }
 
   // Retire et retourne le premier client dans la queue.
   // Si la queue est vide, NULL est retourne.
   Client* obtenirTete(Queue* queue);
 
+  clientAux;
+
+  clientAux = queue->premiere;
+
+  queue->premiere = clientAux->suivant;
+
+  free(clientAux);
+
+  return queue->premiere;
+
+  
 
   // Retourne le nombre de clients dans la queue.
-  int longueurQueue(Queue queue);
-
+  int longueurQueue(Queue queue)
+  {
+  int c;
+  Client* clientAux;
+  clientAux = queue.premiere;
+  while(clientAux->premiere != NULL){
+    clientAux = clientAux->premiere;
+    c = c + 1;
+  }
+  return c;
+}
   // Imprime chaque client de la queue.
   
 
   void imprimerQueue(Queue queue)
-<<<<<<< HEAD
  	{
  			Client* temporaire = queue.premiere;
   			while (temporaire != NULL)
 			{
-  				printf("valor %d", temporaire->nbArticle);
+  				printf("valeur %d", temporaire->nbArticle);
   				temporaire = temporaire->suivant;
   				
   				//
-  				printf("\n");
   			}
   				
   					
@@ -208,26 +167,7 @@ void imprimerQueue(Queue queue);
 
   int main ()
   {
+  
   	nouveauClient();
   	
-=======
-  {
-      Client* temporaire = queue.premiere;
-        while (temporaire != NULL)
-      {
-          printf("valor %d", temporaire->nbArticle);
-          temporaire = temporaire->suivant;
-          
-          //
-          printf("\n");
-        }
-          
-            
-  }
-
-  int main ()
-  {
-    nouveauClient();
-    
->>>>>>> 8870430a2c3eac328190b64d9d82f01985d6f081
   }
