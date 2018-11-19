@@ -46,7 +46,7 @@ void imprimerQueue(Queue queue);
      	{
      		Client* nouveauClient = (Client*)malloc(sizeof(Client)); //cree client
 
-			nouveauClient->suivant = NULL;
+			  nouveauClient->suivant = NULL;
      		nouveauClient->instant = i;
      		nouveauClient->nbArticle = randExpo (0.1);
      		offrirClient (&queue, nouveauClient);
