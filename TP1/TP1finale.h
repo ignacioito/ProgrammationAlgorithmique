@@ -5,6 +5,7 @@
 #define CICLOMAX 200
 #define CHANCE 3
 #define LAMBDA 0.1
+#define arreteParCycle 10000
 
 //--------------------------------------------------------------------------
 
