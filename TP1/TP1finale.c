@@ -47,12 +47,6 @@ int fonctionPiger();
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-int main ()
-{
-  printf("Teste\n");
-	//
-  
-}
 
 double randExpo(double lambda)
 {
@@ -70,7 +64,6 @@ Client* nouveauClient ()
   Queue queueCaisse4;
 
   int ciclo;
-
 	
 	Client* nouveauClient = (Client*)malloc(sizeof(Client));
 	nouveauClient->instant = ciclo;
@@ -83,28 +76,29 @@ Client* nouveauClient ()
     int nombre = rand() % MAX + MIN;     
     if (nombre == CHANCE)
     {
-      if(longueurQueue(queueCaisse1) == 0) offrirClient(&queueCaisse1, nouveauClient());
-      if(longueurQueue(queueCaisse2) == 0) offrirClient(&queueCaisse2, nouveauClient());
-      if(longueurQueue(queueCaisse3) == 0) offrirClient(&queueCaisse3, nouveauClient());
-      if(longueurQueue(queueCaisse4) == 0) offrirClient(&queueCaisse4, nouveauClient());
+      if(longueurQueue(queueCaisse1) == 0) offrirClient(&queueCaisse1, nouveauClient);
+      if(longueurQueue(queueCaisse2) == 0) offrirClient(&queueCaisse2, nouveauClient);
+      if(longueurQueue(queueCaisse3) == 0) offrirClient(&queueCaisse3, nouveauClient);
+      if(longueurQueue(queueCaisse4) == 0) offrirClient(&queueCaisse4, nouveauClient);
 
       if (longueurQueue(queueCaisse1) < longueurQueue(queueCaisse2) && longueurQueue(queueCaisse1) < longueurQueue(queueCaisse3) && longueurQueue(queueCaisse1) < longueurQueue(queueCaisse4))
-      {offrirClient(&queueCaisse1, nouveauClient());}
+      {offrirClient(&queueCaisse1, nouveauClient);}
 
       if (longueurQueue(queueCaisse1) > longueurQueue(queueCaisse2) && longueurQueue(queueCaisse2) < longueurQueue(queueCaisse3) && longueurQueue(queueCaisse2) < longueurQueue(queueCaisse4))
-      {offrirClient(&queueCaisse2, nouveauClient());}
+      {offrirClient(&queueCaisse2, nouveauClient);}
 
       if (longueurQueue(queueCaisse1) > longueurQueue(queueCaisse2) && longueurQueue(queueCaisse2) > longueurQueue(queueCaisse3) && longueurQueue(queueCaisse3) < longueurQueue(queueCaisse4))
-      {offrirClient(&queueCaisse3, nouveauClient());}
+      {offrirClient(&queueCaisse3, nouveauClient);}
 
       if (longueurQueue(queueCaisse1) > longueurQueue(queueCaisse2) && longueurQueue(queueCaisse2) > longueurQueue(queueCaisse3) && longueurQueue(queueCaisse3) > longueurQueue(queueCaisse4))
-      {offrirClient(&queueCaisse4, nouveauClient());} 
+      {offrirClient(&queueCaisse4, nouveauClient);} 
       
     }
     ciclo++;
   }
 
 }
+
 
 // Etat des fonctions et des pointeurs
 // Ajoute le client a la fin de queue.

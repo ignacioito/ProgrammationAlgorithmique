@@ -14,6 +14,6 @@ int ciclo = 0;
 
 int main ()
 {
-  nouveauClient();
+  printf("%d\n", imprimerClient());
   
 }
