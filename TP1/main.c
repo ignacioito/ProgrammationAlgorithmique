@@ -9,8 +9,7 @@
 int main ()
 {
 
-  
   printf("TITRE\n");
-   epicerie();
+  epicerie();
   
 }
