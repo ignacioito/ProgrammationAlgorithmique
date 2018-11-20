@@ -1,3 +1,21 @@
+//**************************************************************************************
+//Auteur : Ignacio Ito
+//Fichier : TP1.c
+//Date : 19 novembre 2018
+//
+//La structure de donnees "Queue"
+//
+//Vous allez implementer la structure de données Queue. Une queue suit le
+//principe "premier arrive, premier servi".
+//La queue sera composee de pointeurs vers des instances de la structure
+//Client (dont les membres sont precises).
+//La queue doit implementer les fonctionnalites offrirClient, coupDOeilTete,
+//obtenirTete, longueurQueue et imprimerQueue.
+//
+//Les bonus sont mis en place.
+//
+//**************************************************************************************
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -92,6 +110,7 @@ void epicerie ()
 
     for (int j = 0; j < 4; ++j)
     {
+      printf("Caisse %d", j+1);
       imprimerQueue(caisse[j]);
       printf("\n");
     }
@@ -100,8 +119,20 @@ void epicerie ()
         
     }
 
-}
 
+}
+// Fonction pour faire le calcul des statistiques
+void statistiquesQueue(Queue* queue, Client* client)
+{
+      printf("STATISTIQUES:\n");
+      printf("Nombre de clients entrés  : \n" );
+      printf("Nombre d'articles vendus  : \n");
+      printf("Temps d'attente moyen     : \n");
+      printf("Temps d'attente maximum   : \n");
+      printf("Nombre d'articles maximum : \n");
+      printf("Nombre d'articles minimum : \n");
+      printf("Nombre d'articles moyen   : \n");   
+}
 
 // Etat des fonctions et des pointeurs
 // Ajoute le client a la fin de queue.
@@ -159,6 +190,7 @@ int longueurQueue(Queue* queue)
 void imprimerQueue(Queue* queue) 
 {
   Client* auxClient = queue->premiere;
+
   printf("[");
  		
   while(auxClient != NULL)
