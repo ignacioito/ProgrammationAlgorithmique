@@ -1,8 +1,8 @@
 //*****************************************
 #pragma once
-#define MIN 3
-#define MAX 3
-#define CICLOMAX 20
+#define MIN 1
+#define MAX 6
+#define CICLOMAX 200
 #define CHANCE 3
 #define LAMBDA 0.1
 #define arreteParCycle 1
@@ -24,6 +24,7 @@ typedef struct Queue Queue;
   struct Queue{
 
   	Client* premiere;
+  	Client* derniere;
 
  };
 
