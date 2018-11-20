@@ -15,17 +15,18 @@ Client* nouveauClient ()
   client->suivant = NULL;
   client->instant = 0;
   client->nbArticle = 0;
-
+  
   return client;
-
 }
 
 
 void commencer(Queue* caisse[])
 {
-  for(int i=0; i<2; i++)
+  for(int i=0; i<4; i++)
   {
-    caisse[i]->premiere = nouveauClient();
+    caisse[i] = (Queue*) malloc(sizeof(Queue));
+    caisse[i]->premiere = NULL;
+    caisse[i]->derniere = NULL;
   }
 }
 
@@ -36,8 +37,8 @@ void commencer(Queue* caisse[])
 
 double randExpo(double lambda)
 {
-  		double u = rand() / (RAND_MAX + 1.0);
-  		return -log(1 - u) / lambda;
+  double u = rand() / (RAND_MAX + 1.0);
+  return -log(1 - u) / lambda;
 }
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
@@ -46,95 +47,85 @@ void epicerie ()
 
   Queue* caisse[4];
 
-   commencer(caisse);
-
-
+  
+  srand(time(NULL));
+  commencer(caisse);
 
   int ciclo = 0;
   int tecla = 0;
   
-
+  
   while (ciclo < CICLOMAX) 
+  {
+    system("clear");  
+    ciclo++;
+    int nombre = rand() % MAX + MIN;     
+    int PG[] = {0,0,0,0};
+    if (nombre == CHANCE)
     {
-      int nombre = rand() % MAX + MIN;     
-      int PG[] = {0,0,0,0};
-      if (nombre == CHANCE)
-        {
-           Client* client = (Client*) malloc(sizeof(Client));
-           client->instant = ciclo;
-           client->nbArticle = randExpo(LAMBDA) + 1;
-           client->suivant = NULL;
-           offrirClient(caisse[0], client);
-        }
+      Client* client = (Client*) malloc(sizeof(Client));
+      client->instant = ciclo;
+      client->nbArticle = randExpo(LAMBDA) + 1;
+      client->suivant = NULL;
 
+      PG[0] = longueurQueue(caisse[0]);
+      PG[1] = longueurQueue(caisse[1]);
+      PG[2] = longueurQueue(caisse[2]);
+      PG[3] = longueurQueue(caisse[3]);
+        
 
+      int minimum = PG[0];
+      int indice = 0;
 
-  PG[0] = longueurQueue(caisse[0]);
-  printf("%d", PG[0]);
-  
-
-  //PG[1] = longueurQueue(caisse[1]);
-  //PG[2] = longueurQueue(caisse[2]);
-  //PG[3] = longueurQueue(caisse[3]);
-
-  int minimum = PG[0];
-  int indice = 0;
-  
-  
-  
-
-  /*
       for (int i = 0; i < 4; ++i)
       {
-        if (PG[i] < minimum)
+        if(PG[i] < minimum)
         {
           minimum = PG[i];
           indice = i;
         }
       }
-
-      
-      
-    }
-
+        offrirClient(caisse[indice], client);
+      }
+  
     ciclo++;
+
     for (int j = 0; j < 4; ++j)
     {
-      imprimerQueue(caisse[j]);*/
-//  }
-    ciclo++;
-    //sleep(arreteParCycle); 
-    scanf("%d", &tecla);
-  }
+      imprimerQueue(caisse[j]);
+      printf("\n");
+    }
+
+    sleep(arreteParCycle); 
+        
+    }
+
 }
+
 
 // Etat des fonctions et des pointeurs
 // Ajoute le client a la fin de queue.
 void offrirClient(Queue* queue, Client* client)
 {
-  Client* auxClient;	
-  if(queue == NULL)
-  {
-  	queue = (Queue*)malloc(sizeof(Queue));
-  	queue->premiere = client;	
+  Client* auxClient = queue->premiere;
+  if (auxClient == NULL)
+  { 
+    queue->premiere = client;
+    queue->derniere = client; 
   }
   else
   {
-  	auxClient = queue->premiere;
+    queue->derniere->suivant = client;
+    queue->derniere = client;
   }
-  	while(auxClient->suivant != NULL)
-  	{
-  		auxClient = auxClient->suivant;
-  	}
-  		auxClient->suivant = client;
+
 }
 
 // Retourne le premier client dans la queue.
 // Si la queue est vide, NULL est retourne.
 Client* coupDOeilTete(Queue queue)
 {
-  if(queue.premiere == NULL) return NULL;
-  else return queue.premiere;
+  return queue.premiere;
 }
 
 // Retire et retourne le premier client dans la queue.
@@ -149,6 +140,7 @@ Client* obtenirTete(Queue* queue)
   	free(auxClient);
   	return queue->premiere;
  }
+
   // Retourne le nombre de clients dans la queue.
 int longueurQueue(Queue* queue)
 {
@@ -160,7 +152,7 @@ int longueurQueue(Queue* queue)
     auxClient = auxClient->suivant;
   }	
   	
-    return conteur;
+  return conteur;
 }
 
 // Imprime chaque client de la queue.
@@ -175,5 +167,5 @@ void imprimerQueue(Queue* queue)
   	auxClient = auxClient->suivant;
   }
   		
-   printf("]");    
+  printf("]");    
 }
