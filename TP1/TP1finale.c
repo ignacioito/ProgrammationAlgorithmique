@@ -3,46 +3,31 @@
 #include <time.h>
 #include <math.h>
 #include <unistd.h>
-
-#define MIN 1
-#define MAX 3
-#define CHANCE 3
-#define CICLOMAX 200
-#define LAMBDA 0.1
-#define arreteParCycle 10000
-
-int ciclo = 0;
-//--------------------------------------------------------------------------
-//--------------------------------------------------------------------------
-//--------------------------------------------------------------------------
-
-typedef struct Client Client;
-  struct Client{
-
-  	int instant;
-  	int nbArticle;
-  	Client* suivant;
-   
-   };
-//--------------------------------------------------------------------------
-//--------------------------------------------------------------------------
-//--------------------------------------------------------------------------
-typedef struct Queue Queue;
-  struct Queue{
-
-  	Client* premiere;
-
- };
+#include "TP1finale.h"
 
 
-double randExpo(double lambda);
-Client* nouveauClient ();
-void offrirClient(Queue* queue, Client* client);
-Client* coupDOeilTete(Queue queue);
-Client* obtenirTete(Queue* queue);
-int longueurQueue(Queue queue);
-void imprimerQueue(Queue queue);
-int fonctionPiger();
+
+
+
+Client* nouveauClient ()
+{
+  Client* client = (Client*) malloc(sizeof(Client));
+  client->suivant = NULL;
+  client->instant = 0;
+  client->nbArticle = 0;
+
+  return client;
+
+}
+
+
+void commencer(Queue* caisse[])
+{
+  for(int i=0; i<2; i++)
+  {
+    caisse[i]->premiere = nouveauClient();
+  }
+}
 
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
@@ -56,55 +41,71 @@ double randExpo(double lambda)
 }
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
-Client* nouveauClient ()
+void epicerie ()
 {
 
-  Queue queueCaisse1 = 0;
-  Queue queueCaisse2 = 0;
-  Queue queueCaisse3 = 0;
-  Queue queueCaisse4 = 0;
+  Queue* caisse[4];
 
-  int pg[4];
-  pg[0] = longueurQueue(queueCaisse1);
-  pg[1] = longueurQueue(queueCaisse2);
-  pg[2] = longueurQueue(queueCaisse3);
-  pg[3] = longueurQueue(queueCaisse4);
+   commencer(caisse);
 
-  int minimum = longueurQueue(queueCaisse1);
-  int indice = 0;
-  int ciclo;
-	
-	Client* nouveauClient = (Client*)malloc(sizeof(Client));
-	nouveauClient->instant = ciclo;
-  nouveauClient->nbArticle = randExpo(LAMBDA) + 1;
-  nouveauClient->suivant = NULL;
-  return nouveauClient;
 
-  while ((ciclo < CICLOMAX)) 
-  {
-    int nombre = rand() % MAX + MIN;     
-    if (nombre == CHANCE)
+
+  int ciclo = 0;
+  int tecla = 0;
+  
+
+  while (ciclo < CICLOMAX) 
     {
+      int nombre = rand() % MAX + MIN;     
+      int PG[] = {0,0,0,0};
+      if (nombre == CHANCE)
+        {
+           Client* client = (Client*) malloc(sizeof(Client));
+           client->instant = ciclo;
+           client->nbArticle = randExpo(LAMBDA) + 1;
+           client->suivant = NULL;
+           offrirClient(caisse[0], client);
+        }
 
 
+
+  PG[0] = longueurQueue(caisse[0]);
+  printf("%d", PG[0]);
+  
+
+  //PG[1] = longueurQueue(caisse[1]);
+  //PG[2] = longueurQueue(caisse[2]);
+  //PG[3] = longueurQueue(caisse[3]);
+
+  int minimum = PG[0];
+  int indice = 0;
+  
+  
+  
+
+  /*
       for (int i = 0; i < 4; ++i)
       {
-        if (pg[i] < minimum)
+        if (PG[i] < minimum)
         {
-          minimum = pg[i];
+          minimum = PG[i];
           indice = i;
         }
       }
 
-
-    offrirClient(pg[indice], nouveauClient);
-
-    imprimerQueue(pg[indice]);
+      
       
     }
-    ciclo++;
-  }
 
+    ciclo++;
+    for (int j = 0; j < 4; ++j)
+    {
+      imprimerQueue(caisse[j]);*/
+//  }
+    ciclo++;
+    //sleep(arreteParCycle); 
+    scanf("%d", &tecla);
+  }
 }
 
 // Etat des fonctions et des pointeurs
@@ -118,7 +119,9 @@ void offrirClient(Queue* queue, Client* client)
   	queue->premiere = client;	
   }
   else
+  {
   	auxClient = queue->premiere;
+  }
   	while(auxClient->suivant != NULL)
   	{
   		auxClient = auxClient->suivant;
@@ -147,32 +150,30 @@ Client* obtenirTete(Queue* queue)
   	return queue->premiere;
  }
   // Retourne le nombre de clients dans la queue.
-int longueurQueue(Queue queue)
+int longueurQueue(Queue* queue)
 {
  	int conteur = 0;
- 	Client* auxClient;
- 	if(queue.premiere == NULL) return 0;
- 	else
- 	
-  while(auxClient->suivant != NULL)
+ 	Client* auxClient = queue->premiere; 	
+  while(auxClient != NULL)
   {
-  	auxClient = auxClient->suivant;
   	conteur++;
+    auxClient = auxClient->suivant;
   }	
-  	return conteur;
+  	
+    return conteur;
 }
 
 // Imprime chaque client de la queue.
-void imprimerQueue(Queue queue) 
+void imprimerQueue(Queue* queue) 
 {
-  Client* auxClient;
- 	if(queue.premiere == NULL) printf("[]");
- 	else
+  Client* auxClient = queue->premiere;
+  printf("[");
  		
-  while(auxClient->suivant != NULL)
+  while(auxClient != NULL)
   {
-  	printf("[{cycle #%d, %d articles}]", ciclo, queue.premiere->nbArticle);
+  	printf("[{cycle #%d, %d articles}]", auxClient->instant, auxClient->nbArticle);
   	auxClient = auxClient->suivant;
   }
   		
+   printf("]");    
 }
