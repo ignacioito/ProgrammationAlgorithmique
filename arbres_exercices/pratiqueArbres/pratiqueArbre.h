@@ -13,15 +13,18 @@
 
 enum {VIDE, TRONC, TERMINAL, BRANCHE};
 
-typedef struct Noeud Noeud;
+typedef struct Noeud* Noeud;
 struct Noeud{
 	char donnee;
 	Noeud* d;
 	Noeud* g;
 };
 
+typedef struct Queue Queue;
+struct Queue{
+	Noeud* racine;
+	Queue* suivant;
+};
 
-Noeud* genererArbre(int nbNoeuds);
-Noeud* creerNoeud(char donnee, Noeud* g, Noeud* d);
-void libererNoeud(Noeud* n);
-void parcoursProfondeur(Noeud* noeudArbre);
+
+Noeud* genererArbre(char donnee, Noeud* g, Noeud* d);
