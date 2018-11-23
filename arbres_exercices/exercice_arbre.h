@@ -30,6 +30,7 @@ struct NoeudInacio
   NoeudInacio* d;
 };
 
+
 Noeud* creerNoeud(char donnee, Noeud* g, Noeud* d);
 void libererNoeud(Noeud* n);
 Noeud* genererArbre(int nbNoeuds);
