@@ -34,6 +34,13 @@ void libererNoeud(Noeud* n)
   }
 }
 
+Noeud* genererArbreInacio(noeudinacio* racineInacio, int donnee)
+{
+  if (racineInacio == NULL)
+    return creerNoeud((rand() % ('Z' - 'A' + 1)) + 'A', genererArbre(nbNoeuds / 2), genererArbre((nbNoeuds - 1) / 2));
+  return NULL;
+}
+
 Noeud* genererArbre(int nbNoeuds)
 {
   if (nbNoeuds > 0)
@@ -45,11 +52,11 @@ Noeud* genererArbre(int nbNoeuds)
 
 void parcoursProfondeur(Noeud* racine)
 {
-  if (racine != NULL)
+  if (racine != NULL) // condition d'arrete: quand racine est NULL
   {
-    printf("* %c ", racine->donnee);
-    parcoursProfondeur(racine->g);
-    parcoursProfondeur(racine->d);
+    printf("* %c ", racine->donnee); // Calcul de plus
+    parcoursProfondeur(racine->g); // appelle recursif
+    parcoursProfondeur(racine->d); // appel recursif
   }
 }
 
