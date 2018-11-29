@@ -14,13 +14,19 @@ void triInsertion(char *n, int t){
 	}
 	for (int l = 0; l < t; ++l)
 	{
-		printf("%c\n", n[l]);
+		printf("%c", n[l]);
 	}
+	printf("\n");
 }
 
 int main()
 {
 	char v[]={"ANFGDK"};
+	for (int i = 0; i < T; ++i)
+	{
+		printf("%c", v[i]);
+	}
+	printf("\n");
 	triInsertion(v, T);
 	return 0;
 }
