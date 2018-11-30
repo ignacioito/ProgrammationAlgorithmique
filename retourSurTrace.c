@@ -50,6 +50,7 @@ void printEchiquier(int echiquier[TAILLE][TAILLE])
         printf("%d ", echiquier[i][j]);
       printf("\n");
   }
+  printf("\n");
 }
 
 //*********************************************************
@@ -71,7 +72,7 @@ int dames(int echiquier[TAILLE][TAILLE], int nbDames)
   //placer nbDames dans l'echiquier
   if (nbDames == 0)
   {
-    return 1;
+    printEchiquier(echiquier);
   }
   for (int i = 0; i < TAILLE; ++i)
   {
@@ -83,12 +84,14 @@ int dames(int echiquier[TAILLE][TAILLE], int nbDames)
         if (dames(echiquier, nbDames - 1))
         {
           return 1;
-          echiquier[i][j] = 0; //enleve la dame
+          
         }
+        echiquier[i][j] = 0; //enleve la dame
       }
     }
-    return 0;
+    
   }
+  return 0;
 }
 
   
