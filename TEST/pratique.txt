@@ -1,0 +1,31 @@
+Survol de la matière
+--------------------
+
+Qu'est-ce qu'une opération de base?
+Qu'est-ce qu'un algorithme correct? Efficace?
+
+Quelles sont les trois sections de mémoire pour les exécutables?
+Quels sont leur rôle, leur contenu?
+Quand sont-elles libérées?
+Déclarez des variables dans chaque section.
+
+Qu'est-ce qu'une pile? Une file? Une liste chaînée? Un tableau dynamique?
+
+Comment ajoute/retire-t-on un élément dans un tableau dynamique? Une liste chaînée?
+
+Appliquez les quatre algorithmes de tri (sélection/insertion/bulle/fusion) sur un tableau. Quelles sont les forces et les faiblesses de chacun?
+
+Dans une fonction récursive, qu'est-ce que la condition de sortie, l'appel récursif et le calcul de plus? Transformez un algorithme récursif en algorithme itératif (non récursif).
+
+Qu'est-ce qu'un arbre, une racine, une feuille, un noeud? Qu'est-ce la profondeur? Qu'est-ce qu'un arbre binaire? De recherche? Appliquez le parcours en profondeur sur un arbre. 
+
+Questions pratiques
+-------------------
+
+Créez un algorithme qui compte le nombre de noeuds dans un arbre binaire.
+
+Créez un algorithme qui trouve la quantité de noeuds de valeur 10 dans une liste chaînée d'entier.
+
+Suivez la pile d'exécution pour palindrome sur "WoPoW".
+Suivez la pile d'exécution pour le main dans dynamique.c (sans les printf)
+

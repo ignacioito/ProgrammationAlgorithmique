@@ -68,7 +68,27 @@ void printEchiquier(int echiquier[TAILLE][TAILLE])
 //*********************************************************
 int dames(int echiquier[TAILLE][TAILLE], int nbDames)
 {
-  
+  //placer nbDames dans l'echiquier
+  if (nbDames == 0)
+  {
+    return 1;
+  }
+  for (int i = 0; i < TAILLE; ++i)
+  {
+    for (int j = 0; j < TAILLE; ++j)
+    {
+      if (libre(echiquier, i, j))
+      {
+        echiquier[i][j] = 1;
+        if (dames(echiquier, nbDames - 1))
+        {
+          return 1;
+          echiquier[i][j] = 0; //enleve la dame
+        }
+      }
+    }
+    return 0;
+  }
 }
 
   
