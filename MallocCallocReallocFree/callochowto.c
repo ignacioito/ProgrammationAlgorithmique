@@ -57,6 +57,13 @@ int main()
 }
 
 
+/*
+Sendo assim, qual é a diferença entre o malloc e o calloc?
+A diferença além da ligeira diferença de sintaxe é que o malloc aloca a memória
+com os espaços vazios. O calloc aloca a memória do mesmo jeito, mas preenche os
+espaços com 0. (o malloc vai exibir números estranhos, lixo de memória: 23X8983)
+
+*/
 
 
 
