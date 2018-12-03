@@ -23,8 +23,10 @@
  * \date 22 octobre 2018
  *
  */
+void trouverMot(char *filename, int nblines);
 
-void genererGrille(){
+void genererGrille()
+{
 
 	char grille[4][4];
 	int indexL;
@@ -50,7 +52,7 @@ void genererGrille(){
 	
 }
 
-int lireFichier(char *filename, char motComplet[]){
+int lireFichier(char *filename){
 
 	int a = 0;
 	int b = 0;
@@ -70,19 +72,44 @@ int lireFichier(char *filename, char motComplet[]){
     {
 	int l = strlen(mot);
 	mot[l - 1] = '\0';
-	printf("%s, ", mot);
+	nblines++;
     }
     
     fclose(file);
     return nblines;
 }
 
+void trouverMot(char *filename, int nblines){
+	char mot[nblines];
+
+	for (int i = 0; i < nblines; ++i)
+	{
+		printf("%c - - ", mot[i]);
+	}
+}
+
+void lireMotsFichier(char tab[][BUFF], int nblines, char *filename){
+	char mot[BUFF];
+	FILE *file = fopen(filename, "r");
+	while (fgets(mot, BUFF, file) != NULL) 
+    {
+	int l = strcpy(tab, filename);
+	mot[l - 1] = '\0';
+	printf("%c\n", tab);
+    }	
+}
+
 int main()
 {
 	srand(time(NULL));
-	char motComplet[18];
+	//char motComplet[18];
 	genererGrille();
-	gets(motComplet);
+	//scanf("%c", motComplet);
+	int nbmot = lireFichier("francais.txt");
+	char dic[nbmot][BUFF];
+	lireMotsFichier(dic, nbmot, "francais.txt");
+
+	/*
 	if (lireFichier("francais.txt", motComplet) == 1) 
 	{
 		printf(" Le mot est là!\n");
@@ -90,6 +117,6 @@ int main()
 	else
 	{
 		printf(" Le mot n'est pas là!\n");
-	}
+	}*/
 	return 0;
 }

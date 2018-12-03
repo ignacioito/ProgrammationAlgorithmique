@@ -80,7 +80,8 @@ int dames(int echiquier[TAILLE][TAILLE], int nbDames)
     {
       if (libre(echiquier, i, j))
       {
-        echiquier[i][j] = nbDames;
+        echiquier[i][j] = nbDamesls
+        ;
         if (dames(echiquier, nbDames - 1))
         {
           return 1;
