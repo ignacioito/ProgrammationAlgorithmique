@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#define BUFF 20
+#define BUFF 30
 #define TAILLE 4
 
 /**
@@ -90,12 +90,15 @@ void trouverMot(char *filename, int nblines){
 
 void lireMotsFichier(char tab[][BUFF], int nblines, char *filename){
 	char mot[BUFF];
+	int i = 0;
 	FILE *file = fopen(filename, "r");
 	while (fgets(mot, BUFF, file) != NULL) 
     {
-	int l = strcpy(tab, filename);
-	mot[l - 1] = '\0';
-	printf("%c\n", tab);
+	strcpy(tab[i], mot);
+	//mot[l - 1] = '\0';
+	printf("%c\n", tab[i]);
+	i++;
+
     }	
 }
 
