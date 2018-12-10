@@ -23,7 +23,6 @@
  * \date 22 octobre 2018
  *
  */
-void trouverMot(char *filename, int nblines);
 
 void genererGrille()
 {
@@ -88,6 +87,16 @@ void trouverMot(char *filename, int nblines){
 	}
 }
 
+void boggletrouverMot(char *filename, int nblines){
+	char mot[BUFF];
+	int i = 0;
+	FILE *file = fopen(filename, "r");
+	if (file == mot)
+	{
+		printf("%c\n", mot);
+	}
+}
+
 void lireMotsFichier(char tab[][BUFF], int nblines, char *filename){
 	char mot[BUFF];
 	int i = 0;
@@ -96,7 +105,7 @@ void lireMotsFichier(char tab[][BUFF], int nblines, char *filename){
     {
 	strcpy(tab[i], mot);
 	//mot[l - 1] = '\0';
-	printf("%c\n", tab[i]);
+	printf("%s\n", tab[i]);
 	i++;
 
     }	
