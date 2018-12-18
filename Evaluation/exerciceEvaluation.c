@@ -11,23 +11,23 @@ struct Palavra {
 };
 
 
-void fonctionAssainissement(Palavra inacio[5]){
+void fonctionAssainir(Palavra inacio[5]){
 	//
 	char auxiliar[30];
 	printf("Foi\n");
-	for (int j = 0; j < 30; ++j)
+	for (int i = 0; i < 5; ++i)
 	{
-		for (int i = 0; i < strlen(inacio[5].Mot); ++i)
+		for (int j = 0; j < 30; ++j)
 		{
 			if (((inacio[i].Mot[j]) >= 65) && ((inacio[i].Mot[j]) <= 90))
 			{
 				strcpy(auxiliar, inacio[i].Mot[j]);
-				printf("teste %s", inacio[i].Mot[j]);
+				printf("test %s", auxiliar);
 			}
 		}	
 	}
 	
-	
+	printf("test\n");
 	printf("\n");
 
 }
@@ -63,7 +63,7 @@ int main()
 		printf("%s\n", inacio[j].Mot);
 	}
 	
-	fonctionAssainissement(inacio);
+	fonctionAssainir(inacio);
 
 	meilleurMot(inacio);
 	
